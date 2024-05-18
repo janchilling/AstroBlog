@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const useNasaAPOD = () => {
     const [pictureData, setPictureData] = useState(null);
@@ -10,15 +11,9 @@ const useNasaAPOD = () => {
         const fetchPictureOfTheDay = async () => {
             setIsLoading(true);
             setError(null);
-
             try {
-                const response = await fetch('https://api.nasa.gov/planetary/apod?api_key=' + apiKey);
-                if (!response.ok) {
-                    throw new Error('Failed to fetch data');
-                }
-                const data = await response.json();
-                console.log(data);
-                setPictureData(data);
+                const response = await axios.get(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`);
+                setPictureData(response.data);
             } catch (error) {
                 setError(error.message);
             } finally {
@@ -28,7 +23,7 @@ const useNasaAPOD = () => {
 
         fetchPictureOfTheDay();
 
-    }, []);
+    }, [apiKey]);
 
     return { pictureData, isLoading, error };
 };

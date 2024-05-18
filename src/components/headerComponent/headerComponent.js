@@ -4,7 +4,7 @@ import {useAuth} from "../../auth/config/authContext";
 
 export default function Header() {
     const [navbarOpen, setNavbarOpen] = useState(false);
-    const { currentUser, logout } = useAuth(); // Use the useAuth hook to access currentUser and logout function
+    const { currentUser, logout } = useAuth();
     const navigate = useNavigate();
 
     function handleRoverImages() {
@@ -65,7 +65,7 @@ export default function Header() {
                     <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center font-semibold pl-7">
                         <a className="cursor-pointer mr-6 hover:text-white" onClick={handleHome}>Home</a>
                         <a className="cursor-pointer mr-6 hover:text-white" onClick={handleRoverImages}>Mars Rovers</a>
-                        <a className="mr-6 hover:text-white" href="/404">404</a>
+                        <a className="mr-6 hover:text-white" href="/404">About</a>
                     </nav>
                     {currentUser ? (
                         <button className="px-4 py-2 mt-2 text-sm font-semibold text-black bg-white blue-600 transition duration-500 ease-in-out transform bg-transparent rounded-lg dark:text-gray-300 md:mt-0 md:ml-4 hover:text-white focus:text-gray-900 hover:bg-blue-700 focus:bg-gray-200 focus:outline-none focus:shadow-outline" onClick={logout}>

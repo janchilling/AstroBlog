@@ -8,6 +8,7 @@ import MarsRoverPage from "./pages/marsRoverPage/marsRoverPage";
 import LoginComponent from "./auth/components/loginComponent/loginComponent";
 import RegisterComponent from "./auth/components/registerComponent/registerComponent";
 import {AuthProvider} from "./auth/config/authContext";
+import RoverImagesPage from "./pages/roverImagesPage/roverImagesPage";
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                     <Route path="/login" element={<LoginComponent/>} />
                     <Route path="/near-earth-objects" element={<NeoWsPage/>}/>
                     <Route path="/mars-rover-images" element={<MarsRoverPage/>}/>
+                    <Route path="/rover-images/:roverName" element={<RoverImagesPage />} />
                 </Routes>
                 <Footer/>
             </div>

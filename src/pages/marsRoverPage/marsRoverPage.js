@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import useRoverImages from "../../hooks/useRoverImages";
+import {useNavigate} from "react-router-dom";
 
 function MarsRoverPage() {
     const { latestImages, loading: roverLoading } = useRoverImages();
-    console.log(latestImages)
+    const navigate = useNavigate();
 
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -15,25 +16,27 @@ function MarsRoverPage() {
         setCurrentIndex(prevIndex => (prevIndex === 0 ? latestImages.length - 1 : prevIndex - 1));
     };
 
+    const handleExploreButtonClick = (roverName) => {
+        navigate(`/rover-images/${roverName}`);
+    };
+
     return (
         <div>
             <div className="container px-5 pt-32 mx-auto lg:px-4 lg:py-4">
                 <div className="flex flex-col w-full mb-2 text-left md:text-center ">
-                    <h1 className="mb-2 text-4xl font-bold tracking-tighter text-black lg:text-6xl md:text-5xl">
+                    <h1 className="mb-2 mt-4 text-4xl font-bold tracking-tighter text-black lg:text-6xl md:text-5xl">
                         <span>Dive into the Realms of </span>
                         <br className="hidden lg:block"></br>
                         the Martian Land
                     </h1>
                     <br></br>
                     <p className="mx-auto  text-xl font-normal leading-relaxed text-gray-600 dark:text-gray-300 lg:w-2/3">
-                        nine4 is a free to use template website for websites made with{" "}
-                        <a href="https://nextjs.org/" className="underline">
-                            Next.js
-                        </a>{" "}
-                        and styled with Tailwind CSS
+                        Lorem ipsum dolor sit amet. Hic veniam ipsa qui nihil autem qui provident dolore quo tempore maiores. Cum vitae earum
+                        aut provident quis ab voluptatem sequi aut itaque corrupti et aliquam perferendis aut voluptas nemo!
                     </p>
                 </div>
             </div>
+            <div className="container px-5 pt-32 mx-auto lg:px-4 lg:py-4">
             <main className="my-8 px-20">
                 <div className="container mx-auto px-6">
                     <div className="h-64 rounded-md overflow-hidden bg-cover bg-center"
@@ -43,7 +46,7 @@ function MarsRoverPage() {
                                 <h2 className="text-2xl text-white font-semibold">Curiosity Rover</h2>
                                 <p className="mt-2 text-gray-400">Lorem ipsum dolor, sit amet consectetur adipisicing
                                     elit. Tempore facere provident molestias ipsam sint voluptatum pariatur.</p>
-                                <button
+                                <button onClick={() => handleExploreButtonClick('curiosity')}
                                     className="flex items-center mt-4 px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
                                     <span>Explore</span>
                                     <svg className="h-5 w-5 mx-2" fill="none" strokeLinecap="round"
@@ -64,7 +67,7 @@ function MarsRoverPage() {
                                     <p className="mt-2 text-gray-400">Lorem ipsum dolor, sit amet consectetur
                                         adipisicing elit. Tempore facere provident molestias ipsam sint voluptatum
                                         pariatur.</p>
-                                    <button
+                                    <button onClick={() => handleExploreButtonClick('opportunity')}
                                         className="flex items-center mt-4 px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
                                         <span>Explore</span>
                                         <svg className="h-5 w-5 mx-2" fill="none" strokeLinecap="round"
@@ -85,7 +88,7 @@ function MarsRoverPage() {
                                     <p className="mt-2 text-gray-400">Lorem ipsum dolor, sit amet consectetur
                                         adipisicing elit. Tempore facere provident molestias ipsam sint voluptatum
                                         pariatur.</p>
-                                    <button
+                                    <button onClick={() => handleExploreButtonClick('spirit')}
                                         className="flex items-center mt-4 px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
                                         <span>Explore</span>
                                         <svg className="h-5 w-5 mx-2" fill="none" strokeLinecap="round"
@@ -103,6 +106,7 @@ function MarsRoverPage() {
             <div className="container px-20 mx-auto">
                 <div className="leading-relaxed pb-4">
                     <h3 className="text-2xl font-bold tracking-tighter text-black lg:text-4xl md:text-3xl">About the Martian Mission</h3>
+                    <hr className="h-0.5 mt-3 mb-6 bg-blue-950 border-0"/>
                     <ul className="pl-8 mb-4">
                         <li className="list-disc list-inside">At vero eos et accusamus et iusto odio dignissimos ducimus
                             qui blanditiis praesentium
@@ -147,15 +151,14 @@ function MarsRoverPage() {
                         ante ipsum primis in faucibus.</p>
                     <div className="container mx-auto">
                         <div className="leading-relaxed pb-4">
-                            <h3 className="text-2xl font-bold tracking-tighter text-black lg:text-4xl md:text-3xl">Latest Rover Images</h3>
+                            <h3 className="text-2xl mt-10 font-bold tracking-tighter text-black lg:text-4xl md:text-3xl">Latest Rover Images</h3>
+                            <hr className="h-0.5 mt-3 mb-6 bg-blue-950 border-0"/>
                             <div className="relative w-full flex items-center">
-                                <button
-                                    className="absolute bg-blue-800 hover:bg-blue-700 text-white text-2xl font-bold hover:shadow rounded-full w-16 h-16 ml-12"
-                                    onClick={decrementIndex} // Use decrementIndex function on button click
-                                >
+                                <button className="absolute bg-blue-800 hover:bg-blue-700 text-white text-2xl font-bold hover:shadow rounded-full w-16 h-16 ml-12"
+                                        onClick={decrementIndex}>
                                     &#8592;
                                 </button>
-                                <div className="flex w-full overflow-x-auto">
+                                <div className="flex w-full overflow-hidden">
                                     {latestImages && latestImages.length > 0 ? (
                                         latestImages.map((image, index) => (
                                             <img key={index} className={`w-64 h-64 object-cover mr-4 ${index === currentIndex ? 'opacity-100' : 'opacity-50 hover:opacity-75'}`} src={image.img_src} alt={`Rover Image ${index}`} />
@@ -166,15 +169,14 @@ function MarsRoverPage() {
                                 </div>
                                 <button
                                     className="absolute right-0 bg-blue-800 hover:bg-blue-700 text-white text-2xl font-bold hover:shadow rounded-full w-16 h-16 mr-12"
-                                    onClick={incrementIndex} // Use incrementIndex function on button click
-                                >
+                                    onClick={incrementIndex}>
                                     &#8594;
                                 </button>
                             </div>
-
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     );
