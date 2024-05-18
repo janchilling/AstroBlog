@@ -18,6 +18,8 @@ export const AuthProvider = ({ children }) => {
     const login = async (email, password) => {
         try {
             await auth.signInWithEmailAndPassword(email, password);
+            const token = await auth.currentUser.getIdToken();
+            localStorage.setItem("token", token);
             navigate("/");
         } catch (error) {
             throw error;
@@ -25,6 +27,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     const logout = () => {
+        localStorage.removeItem("token");
         return auth.signOut();
     };
 
